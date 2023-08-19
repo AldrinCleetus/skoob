@@ -16,7 +16,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './src/types/types';
 import Home from './src/pages/Home';
 import ProfileScreen from './src/pages/Profile';
-import {MyDefaultTheme} from './src/utils/Theme';
+import {MyDarkTheme, MyDefaultTheme} from './src/utils/Theme';
 import {Provider} from 'react-redux';
 import Store from './src/store/Store';
 import ViewAllBooks from './src/pages/ViewAllBooks';
@@ -28,7 +28,8 @@ function App() {
   return (
     <Provider store={Store}>
       <NavigationContainer
-        theme={{...MyDefaultTheme, dark: colorScheme === 'dark'}}>
+        // theme={{...MyDefaultTheme, dark: colorScheme === 'dark'}}
+        theme={colorScheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
         <Tab.Navigator
           screenOptions={{
             headerShown: false,

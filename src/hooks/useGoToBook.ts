@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {BasicBookDetails, HomeNavigation} from '../types/types';
 
-export const useGoToBook = (book: BasicBookDetails) => {
+const useGoToBook = (book: BasicBookDetails) => {
   const navigator = useNavigation<HomeNavigation>();
 
   const goToBook = () => {
@@ -12,3 +12,5 @@ export const useGoToBook = (book: BasicBookDetails) => {
 
   return goToBook;
 };
+
+export default useGoToBook;

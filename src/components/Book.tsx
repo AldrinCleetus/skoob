@@ -1,9 +1,11 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {MyDefaultTheme} from '../utils/Theme';
 import {BookProps} from '../types/types';
-import {useGoToBook} from '../hooks/useGoToBook';
+import useGoToBook from '../hooks/useGoToBook';
+import {useTheme} from '@react-navigation/native';
 
 const Book = ({book}: BookProps) => {
+  const {colors} = useTheme();
   const openThisBook = useGoToBook(book);
 
   return (
@@ -23,7 +25,7 @@ const Book = ({book}: BookProps) => {
           overflow: 'hidden',
           paddingHorizontal: 6,
           paddingVertical: 8,
-          backgroundColor: 'white',
+          backgroundColor: colors.card,
         }}>
         <Image
           style={{
