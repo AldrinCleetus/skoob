@@ -18,8 +18,8 @@ import {RootStackParamList} from './src/types/types';
 import Home from './src/pages/Home';
 import ProfileScreen from './src/pages/Profile';
 import {MyDarkTheme, MyDefaultTheme} from './src/utils/Theme';
-import {Provider} from 'react-redux';
-import Store from './src/store/Store';
+import {Provider, useSelector} from 'react-redux';
+import Store, {RootState} from './src/store/Store';
 import ViewAllBooks from './src/pages/ViewAllBooks';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -34,96 +34,20 @@ import {
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import AuthenticationPage from './src/pages/AuthenticationPage';
-
-const Tab = createBottomTabNavigator<RootStackParamList>();
+import {Auth0Provider, useAuth0} from 'react-native-auth0';
+import {CLIENT_ID, DOMAIN_ID} from './src/utils/contants';
+import InitialPage from './src/pages/InitialPage';
 
 function App() {
   const colorScheme: ColorSchemeName = useColorScheme();
   const {colors} = useTheme();
-  const isAuth = false;
-
+  const {user} = useAuth0();
   return (
-    <Provider store={Store}>
-      <NavigationContainer
-        // theme={{...MyDefaultTheme, dark: colorScheme === 'dark'}}
-        theme={colorScheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarStyle: {
-              position: 'absolute',
-              marginHorizontal: 10,
-              borderRadius: 100,
-              marginBottom: 10,
-              backgroundColor: colors.card,
-            },
-          }}>
-          {isAuth ? (
-            <>
-              <Tab.Screen
-                options={{
-                  tabBarIcon: ({size, color, focused}) => (
-                    <FontAwesomeIcon size={size} color={color} icon={faHome} />
-                  ),
-                }}
-                name="Home"
-                component={Home}
-              />
-              <Tab.Screen
-                name="Recommended"
-                component={ViewAllBooks}
-                options={{
-                  tabBarIcon: ({size, color, focused}) => (
-                    <FontAwesomeIcon
-                      size={size}
-                      color={color}
-                      icon={faBookOpen}
-                    />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Bookmarks"
-                component={ProfileScreen}
-                options={{
-                  tabBarIcon: ({size, color, focused}) => (
-                    <FontAwesomeIcon
-                      size={size}
-                      color={color}
-                      icon={faBookBookmark}
-                    />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={{
-                  tabBarIcon: ({size, color, focused}) => (
-                    <FontAwesomeIcon
-                      size={size}
-                      color={color}
-                      icon={faUserCircle}
-                    />
-                  ),
-                }}
-              />
-            </>
-          ) : (
-            <Tab.Screen
-              name="Auth"
-              component={AuthenticationPage}
-              options={{
-                tabBarStyle: {
-                  display: 'none',
-                },
-              }}
-            />
-          )}
-        </Tab.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <Auth0Provider domain={DOMAIN_ID} clientId={CLIENT_ID}>
+      <Provider store={Store}>
+        <InitialPage></InitialPage>
+      </Provider>
+    </Auth0Provider>
   );
 }
 

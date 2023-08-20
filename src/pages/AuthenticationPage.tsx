@@ -1,8 +1,17 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {AuthenticationPageProps} from '../types/types';
 import {useTheme} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faGoogle} from '@fortawesome/free-brands-svg-icons';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../store/Store';
+import {setLoggedIn, setUserLoading} from '../store/features/userAuthSlice';
+import SignInButton from '../components/SignInButton';
 
 const AuthenticationPage = (props: AuthenticationPageProps) => {
   const {colors, dark} = useTheme();
@@ -10,6 +19,10 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
   const LogoImage = dark
     ? require('../../assets/logo-main.png')
     : require('../../assets/logo-main-light.png');
+
+  const {isUserLoggedIn, status} = useSelector(
+    (state: RootState) => state.userAuth,
+  );
 
   return (
     <View
@@ -24,27 +37,14 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
       <Image
         style={{width: '100%', height: 300, alignSelf: 'center'}}
         source={LogoImage}></Image>
-      <TouchableOpacity
-        style={{
-          display: 'flex',
-          backgroundColor: colors.card,
-          width: '60%',
-          alignSelf: 'center',
-          justifyContent: 'space-around',
-          flexDirection: 'row',
-          paddingVertical: 15,
-          paddingHorizontal: 10,
-          borderRadius: 100,
-          marginTop: 60,
-        }}>
-        <FontAwesomeIcon
-          size={20}
-          color={colors.text}
-          icon={faGoogle}></FontAwesomeIcon>
-        <Text style={{textAlign: 'center', color: colors.text}}>
-          Sign In With Google
-        </Text>
-      </TouchableOpacity>
+      {status === 'pending' && (
+        <ActivityIndicator
+          style={{alignSelf: 'center'}}
+          color={colors.card}
+          size="large"
+        />
+      )}
+      {status !== 'pending' && <SignInButton />}
     </View>
   );
 };
