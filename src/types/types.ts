@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Recommended: undefined;
   Bookmarks: undefined;
   Profile: undefined;
+  Auth: undefined;
 };
 
 export type HomeTabParamList = {
@@ -21,7 +22,15 @@ export type LandingPageProps = NativeStackScreenProps<
   'Landing'
 >;
 
+export type AuthenticationPageProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Auth'
+>;
+
 export type BookPageProps = NativeStackScreenProps<HomeTabParamList, 'Book'>;
+
+export type HomeNavigation =
+  NativeStackScreenProps<HomeTabParamList>['navigation'];
 
 export type BooksApiResponse = {
   error: string;
