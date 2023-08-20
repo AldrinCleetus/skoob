@@ -10,8 +10,14 @@ import {useTheme} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
-import {setLoggedIn, setUserLoading} from '../store/features/userAuthSlice';
+import {
+  setLoggedIn,
+  setLoggedOut,
+  setUserLoading,
+} from '../store/features/userAuthSlice';
 import SignInButton from '../components/SignInButton';
+import {useEffect} from 'react';
+import {useAuth0} from 'react-native-auth0';
 
 const AuthenticationPage = (props: AuthenticationPageProps) => {
   const {colors, dark} = useTheme();
@@ -23,6 +29,28 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
   const {isUserLoggedIn, status} = useSelector(
     (state: RootState) => state.userAuth,
   );
+
+  const {authorize, user, clearSession, hasValidCredentials, getCredentials} =
+    useAuth0();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const checkIfUserLoggedInAlready = async () => {
+    dispatch(setUserLoading());
+    const isLoggedIn = await hasValidCredentials(100);
+
+    if (isLoggedIn) {
+      // Retrieve credentials and redirect to the main flow
+      // const credentials = await getCredentials();
+      dispatch(setLoggedIn());
+    } else {
+      dispatch(setLoggedOut());
+    }
+  };
+
+  useEffect(() => {
+    checkIfUserLoggedInAlready();
+  }, []);
 
   return (
     <View

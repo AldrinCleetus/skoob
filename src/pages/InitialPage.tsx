@@ -18,20 +18,21 @@ import ViewAllBooks from './ViewAllBooks';
 import ProfileScreen from './Profile';
 import AuthenticationPage from './AuthenticationPage';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useEffect} from 'react';
 
 const InitialPage = () => {
   const Tab = createBottomTabNavigator<RootStackParamList>();
 
   const colorScheme: ColorSchemeName = useColorScheme();
-  const {colors} = useTheme();
-  const {user} = useAuth0();
+  const {colors, dark} = useTheme();
+  const {user, hasValidCredentials, getCredentials} = useAuth0();
 
   const {isUserLoggedIn, status} = useSelector(
     (state: RootState) => state.userAuth,
   );
+
   return (
     <NavigationContainer
-      // theme={{...MyDefaultTheme, dark: colorScheme === 'dark'}}
       theme={colorScheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
       <Tab.Navigator
         screenOptions={{
@@ -42,10 +43,12 @@ const InitialPage = () => {
             marginHorizontal: 10,
             borderRadius: 100,
             marginBottom: 10,
-            backgroundColor: MyDarkTheme.colors.card,
+            backgroundColor: dark
+              ? MyDarkTheme.colors.card
+              : MyDefaultTheme.colors.card,
           },
         }}>
-        {user ? (
+        {isUserLoggedIn ? (
           <>
             <Tab.Screen
               options={{

@@ -4,20 +4,31 @@ import {useTheme} from '@react-navigation/native';
 import {Text, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store/Store';
-import {setLoggedIn, setUserLoading} from '../store/features/userAuthSlice';
+import {
+  setLoggedIn,
+  setLoggedOut,
+  setUserLoading,
+} from '../store/features/userAuthSlice';
 import {useAuth0} from 'react-native-auth0';
 
 const SignInButton = () => {
   const {colors, dark} = useTheme();
 
   const dispatch = useDispatch<AppDispatch>();
-  const {authorize, user, clearSession} = useAuth0();
+  const {authorize, user, clearSession, hasValidCredentials, getCredentials} =
+    useAuth0();
 
-  const onPress = async () => {
+  const onSignIn = async () => {
     try {
       dispatch(setUserLoading());
-      await authorize();
-      dispatch(setLoggedIn());
+      authorize().then(e => {
+        console.log(e);
+        if (e) {
+          dispatch(setLoggedIn());
+        } else {
+          dispatch(setLoggedOut());
+        }
+      });
     } catch (e) {
       console.log(e);
     }
@@ -25,7 +36,7 @@ const SignInButton = () => {
 
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={onSignIn}
       style={{
         display: 'flex',
         backgroundColor: colors.card,

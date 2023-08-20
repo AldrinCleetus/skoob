@@ -1,7 +1,13 @@
 import {Image, Text, TextComponent, View} from 'react-native';
 import {MyDefaultTheme} from '../utils/Theme';
+import {useAuth0} from 'react-native-auth0';
+import {
+  capitalizeFirstLetter,
+  getGreetingBasedOnTimeOfDay,
+} from '../utils/helper';
 
 const LandingNavBar = () => {
+  const {user} = useAuth0();
   return (
     <View
       style={{
@@ -19,7 +25,7 @@ const LandingNavBar = () => {
             color: MyDefaultTheme.colors.primary,
             fontWeight: '300',
           }}>
-          Good Morning,
+          {getGreetingBasedOnTimeOfDay()}
         </Text>
         <Text
           style={{
@@ -27,7 +33,7 @@ const LandingNavBar = () => {
             color: MyDefaultTheme.colors.text,
             fontWeight: 'bold',
           }}>
-          Bruce Wayne
+          {user?.nickname && capitalizeFirstLetter(user.nickname)}
         </Text>
       </View>
       <View style={{width: '50%', height: '100%'}}>

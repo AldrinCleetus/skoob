@@ -11,7 +11,6 @@ const Book = ({book}: BookProps) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log('huh');
         openThisBook();
       }}>
       <View
