@@ -3,7 +3,7 @@ import {ColorSchemeName, useColorScheme} from 'react-native';
 import {useAuth0} from 'react-native-auth0';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
-import {MyDarkTheme, MyDefaultTheme} from '../utils/Theme';
+import {AppDarkColors, MyDarkTheme, MyDefaultTheme} from '../utils/Theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from '../types/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -17,6 +17,7 @@ import Home from './Home';
 import ViewAllBooks from './ViewAllBooks';
 import ProfileScreen from './Profile';
 import AuthenticationPage from './AuthenticationPage';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const InitialPage = () => {
   const Tab = createBottomTabNavigator<RootStackParamList>();
@@ -41,7 +42,7 @@ const InitialPage = () => {
             marginHorizontal: 10,
             borderRadius: 100,
             marginBottom: 10,
-            backgroundColor: colors.card,
+            backgroundColor: MyDarkTheme.colors.card,
           },
         }}>
         {user ? (
@@ -49,7 +50,12 @@ const InitialPage = () => {
             <Tab.Screen
               options={{
                 tabBarIcon: ({size, color, focused}) => (
-                  <FontAwesomeIcon size={size} color={color} icon={faHome} />
+                  <FontAwesomeIcon
+                    style={{backgroundColor: '#FFFFFF00'}}
+                    size={size}
+                    color={color}
+                    icon={faHome}
+                  />
                 ),
               }}
               name="Home"
@@ -61,6 +67,7 @@ const InitialPage = () => {
               options={{
                 tabBarIcon: ({size, color, focused}) => (
                   <FontAwesomeIcon
+                    style={{backgroundColor: '#FFFFFF00'}}
                     size={size}
                     color={color}
                     icon={faBookOpen}
@@ -74,6 +81,7 @@ const InitialPage = () => {
               options={{
                 tabBarIcon: ({size, color, focused}) => (
                   <FontAwesomeIcon
+                    style={{backgroundColor: '#FFFFFF00'}}
                     size={size}
                     color={color}
                     icon={faBookBookmark}
@@ -87,6 +95,7 @@ const InitialPage = () => {
               options={{
                 tabBarIcon: ({size, color, focused}) => (
                   <FontAwesomeIcon
+                    style={{backgroundColor: '#FFFFFF00'}}
                     size={size}
                     color={color}
                     icon={faUserCircle}

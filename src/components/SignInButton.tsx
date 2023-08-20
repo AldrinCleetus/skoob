@@ -36,7 +36,6 @@ const SignInButton = () => {
         paddingVertical: 15,
         paddingHorizontal: 10,
         borderRadius: 100,
-        marginTop: 60,
       }}>
       <FontAwesomeIcon
         size={20}
