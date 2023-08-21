@@ -9,18 +9,18 @@ import LandingNavBar from '../components/LandingNavBar';
 import BooksLineUp from '../components/BooksLineUp';
 import {HomeTabParamList, LandingPageProps} from '../types/types';
 import BookPage from './BookPage';
-import {getBookmarked} from '../store/features/bookmarkSlice';
+import {AnyAction} from '@reduxjs/toolkit';
 
 const Home = () => {
   const {response, status} = useSelector(
     (state: RootState) => state.booksFromApi,
   );
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<any>();
 
   useEffect(() => {
     dispatch(getNewBooksFromAPI());
-    dispatch(getBookmarked());
+    // dispatch(getBookmarked());
   }, []);
 
   const Stack = createNativeStackNavigator<HomeTabParamList>();

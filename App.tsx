@@ -37,6 +37,10 @@ import AuthenticationPage from './src/pages/AuthenticationPage';
 import {Auth0Provider, useAuth0} from 'react-native-auth0';
 import {CLIENT_ID, DOMAIN_ID} from './src/utils/contants';
 import InitialPage from './src/pages/InitialPage';
+import {PersistGate} from 'redux-persist/integration/react';
+
+import {persistStore} from 'redux-persist';
+let persistor = persistStore(Store);
 
 function App() {
   const colorScheme: ColorSchemeName = useColorScheme();
@@ -45,7 +49,9 @@ function App() {
   return (
     <Auth0Provider domain={DOMAIN_ID} clientId={CLIENT_ID}>
       <Provider store={Store}>
-        <InitialPage></InitialPage>
+        <PersistGate loading={null} persistor={persistor}>
+          <InitialPage></InitialPage>
+        </PersistGate>
       </Provider>
     </Auth0Provider>
   );

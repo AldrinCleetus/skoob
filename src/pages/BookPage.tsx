@@ -4,9 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
 import {
   addtoBookmark,
-  getBookmarked,
   removeFromBookmark,
 } from '../store/features/bookmarkSlice';
+import {useEffect} from 'react';
 
 const BookPage = ({route}: BookPageProps) => {
   const book = route.params.bookDetails;
@@ -45,17 +45,23 @@ const BookPage = ({route}: BookPageProps) => {
         {book.price}
       </Text>
 
-      <Button
-        onPress={() => {
-          // dispatch(addtoBookmark(book));
-          dispatch(addtoBookmark(book));
-        }}
-        title="addddd"></Button>
+      {!isBookmarked && (
+        <Button
+          onPress={() => {
+            dispatch(addtoBookmark(book));
+            // dispatch(addtoBookmark(book));
+            // dispatch(addtoBookmark(book));
+          }}
+          title="addddd"></Button>
+      )}
       {isBookmarked && (
         <Button
           onPress={() => {
-            // dispatch(addtoBookmark(book));
+            console.log();
             dispatch(removeFromBookmark(book));
+
+            // dispatch(addtoBookmark(book));
+            // dispatch(removeFromBookmark(book));
           }}
           title="remove"></Button>
       )}

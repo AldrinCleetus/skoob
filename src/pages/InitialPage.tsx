@@ -19,6 +19,7 @@ import ProfileScreen from './Profile';
 import AuthenticationPage from './AuthenticationPage';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useEffect} from 'react';
+import BookmarkedBooksPage from './BookmarkedBooksPage';
 
 const InitialPage = () => {
   const Tab = createBottomTabNavigator<RootStackParamList>();
@@ -80,7 +81,7 @@ const InitialPage = () => {
             />
             <Tab.Screen
               name="Bookmarks"
-              component={ProfileScreen}
+              component={BookmarkedBooksPage}
               options={{
                 tabBarIcon: ({size, color, focused}) => (
                   <FontAwesomeIcon
