@@ -1,23 +1,15 @@
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  Text,
-  View,
-  VirtualizedList,
-} from 'react-native';
+import {FlatList, ScrollView} from 'react-native';
 import Book from '../components/Book';
-import {MyDefaultTheme} from '../utils/Theme';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
 import {useEffect} from 'react';
 import {getNewBooksFromAPI} from '../store/features/bookSlice';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingNavBar from '../components/LandingNavBar';
 import BooksLineUp from '../components/BooksLineUp';
 import {HomeTabParamList, LandingPageProps} from '../types/types';
 import BookPage from './BookPage';
+import {getBookmarked} from '../store/features/bookmarkSlice';
 
 const Home = () => {
   const {response, status} = useSelector(
@@ -28,6 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getNewBooksFromAPI());
+    dispatch(getBookmarked());
   }, []);
 
   const Stack = createNativeStackNavigator<HomeTabParamList>();

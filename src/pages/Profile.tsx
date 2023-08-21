@@ -1,17 +1,26 @@
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useAuth0} from 'react-native-auth0';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store/Store';
 import {setLoggedOut, setUserLoading} from '../store/features/userAuthSlice';
 import {capitalizeFirstLetter} from '../utils/helper';
 import UserStats from '../components/UserStats';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 
 const ProfileScreen = () => {
   const {authorize, user, clearSession} = useAuth0();
   const dispatch = useDispatch<AppDispatch>();
 
   const {colors} = useTheme();
+
+  const navigate = useNavigation();
 
   const logOut = async () => {
     try {
@@ -22,6 +31,10 @@ const ProfileScreen = () => {
       console.log(e);
     }
   };
+
+  if (!user) {
+    return <View></View>;
+  }
 
   return (
     <View style={styles.container}>
@@ -35,6 +48,18 @@ const ProfileScreen = () => {
         sagittis eros, sit amet tristique justo.
       </Text>
       <UserStats />
+      <TouchableOpacity
+        onPress={logOut}
+        style={{
+          width: '80%',
+          alignSelf: 'center',
+          backgroundColor: colors.primary,
+          paddingHorizontal: 10,
+          paddingVertical: 10,
+          borderRadius: 100,
+        }}>
+        <Text style={{alignSelf: 'center', fontSize: 22}}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };

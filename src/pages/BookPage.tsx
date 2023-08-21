@@ -1,8 +1,20 @@
-import {Image, Text, View} from 'react-native';
+import {Button, Image, Text, View} from 'react-native';
 import {BookPageProps} from '../types/types';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../store/Store';
+import {
+  addtoBookmark,
+  getBookmarked,
+  removeFromBookmark,
+} from '../store/features/bookmarkSlice';
 
 const BookPage = ({route}: BookPageProps) => {
   const book = route.params.bookDetails;
+  const dispatch = useDispatch<AppDispatch>();
+  const {bookmarked} = useSelector((state: RootState) => state.bookmark);
+
+  const isBookmarked =
+    bookmarked.filter(bookM => bookM.isbn13 === book.isbn13).length > 0;
   return (
     <View
       style={{
@@ -32,6 +44,21 @@ const BookPage = ({route}: BookPageProps) => {
         }}>
         {book.price}
       </Text>
+
+      <Button
+        onPress={() => {
+          // dispatch(addtoBookmark(book));
+          dispatch(addtoBookmark(book));
+        }}
+        title="addddd"></Button>
+      {isBookmarked && (
+        <Button
+          onPress={() => {
+            // dispatch(addtoBookmark(book));
+            dispatch(removeFromBookmark(book));
+          }}
+          title="remove"></Button>
+      )}
     </View>
   );
 };

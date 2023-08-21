@@ -22,7 +22,6 @@ const SignInButton = () => {
     try {
       dispatch(setUserLoading());
       authorize().then(e => {
-        console.log(e);
         if (e) {
           dispatch(setLoggedIn());
         } else {
@@ -30,7 +29,7 @@ const SignInButton = () => {
         }
       });
     } catch (e) {
-      console.log(e);
+      dispatch(setLoggedOut());
     }
   };
 

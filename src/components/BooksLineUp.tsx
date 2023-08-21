@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {MyDefaultTheme} from '../utils/Theme';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';

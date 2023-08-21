@@ -1,4 +1,4 @@
-import {Image, Text, TextComponent, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {MyDefaultTheme} from '../utils/Theme';
 import {useAuth0} from 'react-native-auth0';
 import {

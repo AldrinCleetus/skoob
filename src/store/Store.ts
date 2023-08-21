@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import booksSlice from './features/bookSlice';
 import userAuthSlice from './features/userAuthSlice';
+import bookmarkSlice from './features/bookmarkSlice';
 
 const Store = configureStore({
   reducer: {
     booksFromApi: booksSlice.reducer,
     userAuth: userAuthSlice.reducer,
+    bookmark: bookmarkSlice.reducer,
   },
 });
 
