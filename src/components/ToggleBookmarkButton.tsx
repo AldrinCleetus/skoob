@@ -1,11 +1,8 @@
 import {faBookBookmark} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../store/Store';
 import {useTheme} from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
-
+import React from 'react';
 export type ToggleButtonWithIconProps = {
   onPressFunction: () => void;
   status: 'ON' | 'OFF';
@@ -15,7 +12,6 @@ const ToggleButtonWithIcon = ({
   onPressFunction,
   status,
 }: ToggleButtonWithIconProps) => {
-  const dispatch = useDispatch<AppDispatch>();
   const {colors} = useTheme();
 
   return (

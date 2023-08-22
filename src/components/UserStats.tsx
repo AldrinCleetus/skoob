@@ -1,6 +1,7 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
 import VerticalSeparator from './VerticalSeparator';
+import React from 'react';
 
 export type UserStatsProps = {
   statOne: {

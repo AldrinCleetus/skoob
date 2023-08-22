@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import {MyDefaultTheme} from '../utils/Theme';
 import Book from '../components/Book';
+import React from 'react';
 
 const BookmarkedBooksPage = () => {
   const {bookmarked} = useSelector((state: RootState) => state.bookmark);

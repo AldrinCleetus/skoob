@@ -1,5 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState: UserAuthentication = {
   isUserLoggedIn: false,

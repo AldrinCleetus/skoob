@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {BasicBookDetails, HomeNavigation} from '../types/types';
+import {HomeNavigation} from '../types/types';
 
 const useViewAll = () => {
   const navigator = useNavigation<HomeNavigation>();

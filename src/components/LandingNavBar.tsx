@@ -5,6 +5,7 @@ import {
   capitalizeFirstLetter,
   getGreetingBasedOnTimeOfDay,
 } from '../utils/helper';
+import React from 'react';
 
 const LandingNavBar = () => {
   const {user} = useAuth0();

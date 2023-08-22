@@ -3,6 +3,7 @@ import {MyDefaultTheme} from '../utils/Theme';
 import {BookProps} from '../types/types';
 import useGoToBook from '../hooks/useGoToBook';
 import {useTheme} from '@react-navigation/native';
+import React from 'react';
 
 const Book = ({book}: BookProps) => {
   const {colors} = useTheme();

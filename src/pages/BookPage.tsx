@@ -1,11 +1,4 @@
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {BookPageProps} from '../types/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
@@ -13,13 +6,14 @@ import {
   addtoBookmark,
   removeFromBookmark,
 } from '../store/features/bookmarkSlice';
-import {useEffect} from 'react';
 import {useTheme} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBookBookmark, faStar} from '@fortawesome/free-solid-svg-icons';
+import {faStar} from '@fortawesome/free-solid-svg-icons';
 import UserStats from '../components/UserStats';
 import Toast from 'react-native-toast-message';
 import ToggleButtonWithIcon from '../components/ToggleBookmarkButton';
+import React from 'react';
+import GenericButton from '../components/GenericButton';
 
 const BookPage = ({route}: BookPageProps) => {
   const book = route.params.bookDetails;
@@ -96,31 +90,24 @@ const BookPage = ({route}: BookPageProps) => {
         statThree={{title: 'Reviews', value: 424}}
       />
 
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          gap: 6,
-        }}>
+      <View style={styles.pageButton}>
         {!isBookmarked ? (
-          <ToggleButtonWithIcon onPressFunction={toggleBookMark} status="OFF" />
+          <>
+            <ToggleButtonWithIcon
+              onPressFunction={toggleBookMark}
+              status="OFF"
+            />
+            <GenericButton />
+          </>
         ) : (
-          <ToggleButtonWithIcon onPressFunction={toggleBookMark} status="ON" />
+          <>
+            <ToggleButtonWithIcon
+              onPressFunction={toggleBookMark}
+              status="ON"
+            />
+            <GenericButton />
+          </>
         )}
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.primary,
-            width: '70%',
-            height: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-          }}>
-          <Text style={{fontWeight: 'normal', fontSize: 24, color: 'white'}}>
-            Read this book
-          </Text>
-        </TouchableOpacity>
       </View>
       <Toast />
     </View>
@@ -166,6 +153,12 @@ const styles = StyleSheet.create({
   },
   ratingAmount: {
     fontSize: 16,
+  },
+  pageButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 6,
   },
 });
 

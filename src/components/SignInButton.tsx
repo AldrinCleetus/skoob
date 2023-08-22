@@ -10,13 +10,13 @@ import {
   setUserLoading,
 } from '../store/features/userAuthSlice';
 import {useAuth0} from 'react-native-auth0';
+import React from 'react';
 
 const SignInButton = () => {
-  const {colors, dark} = useTheme();
+  const {colors} = useTheme();
 
   const dispatch = useDispatch<AppDispatch>();
-  const {authorize, user, clearSession, hasValidCredentials, getCredentials} =
-    useAuth0();
+  const {authorize} = useAuth0();
 
   const onSignIn = async () => {
     try {

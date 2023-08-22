@@ -1,5 +1,4 @@
 import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
-import {applyMiddleware} from '@reduxjs/toolkit';
 
 export const AppColors = {
   primary: '#1E8543',
