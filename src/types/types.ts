@@ -8,9 +8,14 @@ export type RootStackParamList = {
   Auth: undefined;
 };
 
+export type ViewAllBooksProps = {
+  books: BasicBookDetails[];
+};
+
 export type HomeTabParamList = {
   Landing: undefined;
   Book: BookPage;
+  ViewAll: undefined;
 };
 
 export type BookPage = {

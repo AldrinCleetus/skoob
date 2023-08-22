@@ -9,6 +9,11 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import Book from '../components/Book';
 import {MyDefaultTheme} from '../utils/Theme';
+import {BasicBookDetails} from '../types/types';
+
+export type ViewAllBooksProps = {
+  books: BasicBookDetails[];
+};
 
 const ViewAllBooks = () => {
   const {response, status} = useSelector(

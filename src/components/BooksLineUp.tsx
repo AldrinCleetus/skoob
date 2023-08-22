@@ -11,16 +11,18 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import Book from './Book';
 import {BooksLineUpProps} from '../types/types';
+import useViewAll from '../hooks/useViewAll';
 
 const BooksLineUp = ({title, booksToShow}: BooksLineUpProps) => {
   const {status} = useSelector((state: RootState) => state.booksFromApi);
+  const gotToViewAll = useViewAll();
   return (
     <View style={styles.lineUpParent}>
       <View style={styles.lineUpBooks}>
         <Text style={[styles.bookTitle, {color: MyDefaultTheme.colors.text}]}>
           {title}
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={gotToViewAll}>
           <Text
             style={[styles.showMore, {color: MyDefaultTheme.colors.primary}]}>
             View all

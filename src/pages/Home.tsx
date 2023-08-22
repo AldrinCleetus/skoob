@@ -11,6 +11,7 @@ import {HomeTabParamList, LandingPageProps} from '../types/types';
 import BookPage from './BookPage';
 import {AnyAction} from '@reduxjs/toolkit';
 import LandingPage from './LandingPage';
+import ViewAllBooks from './ViewAllBooks';
 
 const Home = () => {
   const {response, status} = useSelector(
@@ -32,6 +33,7 @@ const Home = () => {
       }}>
       <Stack.Screen name="Landing" component={LandingPage} />
       <Stack.Screen name="Book" component={BookPage} />
+      <Stack.Screen name="ViewAll" component={ViewAllBooks} />
     </Stack.Navigator>
   );
 };
