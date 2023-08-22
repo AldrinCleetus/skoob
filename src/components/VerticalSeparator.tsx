@@ -7,9 +7,9 @@ const VerticalSeparator = () => {
 
 const styles = StyleSheet.create({
   separator: {
-    width: 1, // Width of the separator
-    height: '100%', // Height equal to the parent's height
-    backgroundColor: '#ccc', // Color of the separator
+    width: 1,
+    height: '100%',
+    backgroundColor: '#ccc',
   },
 });
 

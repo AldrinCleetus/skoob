@@ -50,7 +50,7 @@ function App() {
     <Auth0Provider domain={DOMAIN_ID} clientId={CLIENT_ID}>
       <Provider store={Store}>
         <PersistGate loading={null} persistor={persistor}>
-          <InitialPage></InitialPage>
+          <InitialPage />
         </PersistGate>
       </Provider>
     </Auth0Provider>

@@ -1,32 +1,52 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
-import {MyDarkTheme} from '../utils/Theme';
 import VerticalSeparator from './VerticalSeparator';
 
-const UserStats = () => {
+export type UserStatsProps = {
+  statOne: {
+    title: string;
+    value: number;
+  };
+  statTwo: {
+    title: string;
+    value: number;
+  };
+  statThree: {
+    title: string;
+    value: number;
+  };
+};
+
+const UserStats = ({statOne, statTwo, statThree}: UserStatsProps) => {
   const {colors} = useTheme();
 
   return (
     <View style={styles.stats}>
       <View style={styles.statItem}>
         <Text style={[styles.statItemTitle, {color: colors.text}]}>
-          Currently Reading
+          {statOne.title}
         </Text>
-        <Text style={[styles.statItemCount, {color: colors.primary}]}>12</Text>
+        <Text style={[styles.statItemCount, {color: colors.primary}]}>
+          {statOne.value}
+        </Text>
       </View>
       <VerticalSeparator />
       <View style={styles.statItem}>
         <Text style={[styles.statItemTitle, {color: colors.text}]}>
-          Finished Reading
+          {statTwo.title}
         </Text>
-        <Text style={[styles.statItemCount, {color: colors.primary}]}>25</Text>
+        <Text style={[styles.statItemCount, {color: colors.primary}]}>
+          {statTwo.value}
+        </Text>
       </View>
       <VerticalSeparator />
       <View style={styles.statItem}>
         <Text style={[styles.statItemTitle, {color: colors.text}]}>
-          Bookmarked
+          {statThree.title}
         </Text>
-        <Text style={[styles.statItemCount, {color: colors.primary}]}>53</Text>
+        <Text style={[styles.statItemCount, {color: colors.primary}]}>
+          {statThree.value}
+        </Text>
       </View>
     </View>
   );

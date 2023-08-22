@@ -1,4 +1,4 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {MyDefaultTheme} from '../utils/Theme';
 import {BookProps} from '../types/types';
 import useGoToBook from '../hooks/useGoToBook';
@@ -13,41 +13,43 @@ const Book = ({book}: BookProps) => {
       onPress={() => {
         openThisBook();
       }}>
-      <View
-        style={{
-          height: 230,
-          width: 150,
-          margin: 10,
-          display: 'flex',
-          justifyContent: 'center',
-          borderRadius: 10,
-          overflow: 'hidden',
-          paddingHorizontal: 6,
-          paddingVertical: 8,
-          backgroundColor: colors.card,
-        }}>
+      <View style={[styles.bookParent, {backgroundColor: colors.card}]}>
         <Image
-          style={{
-            objectFit: 'cover',
-            borderRadius: 5,
-            width: '100%',
-            height: '80%',
-          }}
+          style={styles.bookThumbnail}
           source={{
             uri: book.image,
           }}></Image>
-        <Text
-          style={{
-            color: MyDefaultTheme.colors.text,
-            fontSize: 12,
-            fontWeight: 'bold',
-            marginTop: 6,
-          }}>
+        <Text style={[styles.bookTitle, {color: MyDefaultTheme.colors.text}]}>
           {book.title}
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  bookParent: {
+    height: 230,
+    width: 150,
+    margin: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
+    paddingHorizontal: 6,
+    paddingVertical: 8,
+  },
+  bookThumbnail: {
+    objectFit: 'cover',
+    borderRadius: 5,
+    width: '100%',
+    height: '80%',
+  },
+  bookTitle: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginTop: 6,
+  },
+});
 
 export default Book;

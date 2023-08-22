@@ -1,5 +1,5 @@
 import {NavigationContainer, useTheme} from '@react-navigation/native';
-import {ColorSchemeName, useColorScheme} from 'react-native';
+import {ColorSchemeName, StyleSheet, useColorScheme} from 'react-native';
 import {useAuth0} from 'react-native-auth0';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
@@ -39,15 +39,14 @@ const InitialPage = () => {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
-          tabBarStyle: {
-            position: 'absolute',
-            marginHorizontal: 10,
-            borderRadius: 100,
-            marginBottom: 10,
-            backgroundColor: dark
-              ? MyDarkTheme.colors.card
-              : MyDefaultTheme.colors.card,
-          },
+          tabBarStyle: [
+            styles.tabBarStyle,
+            {
+              backgroundColor: dark
+                ? MyDarkTheme.colors.card
+                : MyDefaultTheme.colors.card,
+            },
+          ],
         }}>
         {isUserLoggedIn ? (
           <>
@@ -123,5 +122,14 @@ const InitialPage = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    position: 'absolute',
+    marginHorizontal: 10,
+    borderRadius: 100,
+    marginBottom: 10,
+  },
+});
 
 export default InitialPage;

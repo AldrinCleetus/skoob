@@ -1,4 +1,4 @@
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import {MyDefaultTheme} from '../utils/Theme';
@@ -10,19 +10,13 @@ const BookmarkedBooksPage = () => {
   return (
     <View>
       <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 32,
-          color: MyDefaultTheme.colors.primary,
-          fontWeight: '300',
-          marginTop: 20,
-        }}>
+        style={[styles.bookmarkTitle, {color: MyDefaultTheme.colors.primary}]}>
         Bookmarked Books
       </Text>
 
       {bookmarked.length > 0 && (
         <FlatList
-          columnWrapperStyle={{flex: 1, justifyContent: 'space-evenly'}}
+          columnWrapperStyle={styles.booksContainer}
           numColumns={2}
           data={bookmarked}
           renderItem={item => {
@@ -32,5 +26,18 @@ const BookmarkedBooksPage = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  bookmarkTitle: {
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: '300',
+    marginTop: 20,
+  },
+  booksContainer: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
+});
 
 export default BookmarkedBooksPage;

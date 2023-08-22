@@ -1,4 +1,10 @@
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import Book from '../components/Book';
@@ -11,22 +17,23 @@ const ViewAllBooks = () => {
   return (
     <View>
       <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 32,
-          color: MyDefaultTheme.colors.primary,
-          fontWeight: '300',
-          marginTop: 20,
-        }}>
+        style={[
+          styles.viewAllContainer,
+          {color: MyDefaultTheme.colors.primary},
+        ]}>
         Recommended
       </Text>
       {status === 'pending' && (
-        <ActivityIndicator size="large" color="#00ff00" />
+        <ActivityIndicator
+          style={{alignSelf: 'center'}}
+          size="large"
+          color="#00ff00"
+        />
       )}
 
       {status === 'succeeded' && (
         <FlatList
-          columnWrapperStyle={{flex: 1, justifyContent: 'space-evenly'}}
+          columnWrapperStyle={styles.viewAllList}
           numColumns={2}
           data={response.books}
           renderItem={item => {
@@ -36,5 +43,20 @@ const ViewAllBooks = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  viewAllContainer: {
+    textAlign: 'left',
+    marginHorizontal: 20,
+    fontSize: 26,
+
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
+  viewAllList: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
+});
 
 export default ViewAllBooks;

@@ -7,16 +7,19 @@ import {
   View,
 } from 'react-native';
 import {useAuth0} from 'react-native-auth0';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../store/Store';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../store/Store';
 import {setLoggedOut, setUserLoading} from '../store/features/userAuthSlice';
 import {capitalizeFirstLetter} from '../utils/helper';
 import UserStats from '../components/UserStats';
 import {useNavigation, useTheme} from '@react-navigation/native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBookBookmark} from '@fortawesome/free-solid-svg-icons';
 
 const ProfileScreen = () => {
   const {authorize, user, clearSession} = useAuth0();
   const dispatch = useDispatch<AppDispatch>();
+  const {bookmarked} = useSelector((state: RootState) => state.bookmark);
 
   const {colors} = useTheme();
 
@@ -47,7 +50,11 @@ const ProfileScreen = () => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis
         sagittis eros, sit amet tristique justo.
       </Text>
-      <UserStats />
+      <UserStats
+        statOne={{title: 'Currently Reading', value: 13}}
+        statTwo={{title: 'Finished Reading', value: 23}}
+        statThree={{title: 'Bookmarked', value: bookmarked.length}}
+      />
       <TouchableOpacity
         onPress={logOut}
         style={{

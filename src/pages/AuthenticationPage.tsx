@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import {AuthenticationPageProps} from '../types/types';
 import {useTheme} from '@react-navigation/native';
@@ -53,21 +54,11 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
   }, []);
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        backgroundColor: colors.primary,
-        height: '100%',
-        alignItems: 'flex-end',
-      }}>
-      <Image
-        style={{width: '100%', height: 300, alignSelf: 'center'}}
-        source={LogoImage}></Image>
+    <View style={[styles.authPageContainer, {backgroundColor: colors.primary}]}>
+      <Image style={styles.authPageLogo} source={LogoImage}></Image>
       {status === 'pending' && (
         <ActivityIndicator
-          style={{alignSelf: 'center'}}
+          style={styles.loader}
           color={colors.card}
           size="large"
         />
@@ -76,5 +67,24 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  authPageContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
+    height: '100%',
+    alignItems: 'flex-end',
+  },
+  authPageLogo: {
+    width: '100%',
+    height: 300,
+    alignSelf: 'center',
+  },
+  loader: {
+    alignSelf: 'center',
+  },
+});
 
 export default AuthenticationPage;
