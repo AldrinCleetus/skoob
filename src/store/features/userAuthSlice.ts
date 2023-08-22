@@ -11,19 +11,6 @@ export type UserAuthentication = {
   status: 'idle' | 'pending' | 'suceeded' | 'failed';
 };
 
-// export const checkIfUserLoggedIn = createAsyncThunk(
-//   'userAuthSlice/userLoggedIn',
-//   async (_, thunkAPI) => {
-//     try {
-//       const token = await AsyncStorage.getItem('userToken');
-//       return token !== null; // Return true if token exists
-//     } catch (error) {
-//       console.error('Error checking logged in status:', error);
-//       return false;
-//     }
-//   },
-// );
-
 const userAuthSlice = createSlice({
   name: 'booksSlice',
   initialState,
@@ -37,7 +24,7 @@ const userAuthSlice = createSlice({
       state.isUserLoggedIn = false;
       console.log('user logged out');
 
-      state.status = 'idle';
+      state.status = 'failed';
     },
     setUserLoading: state => {
       state.isUserLoggedIn = false;

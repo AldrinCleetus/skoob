@@ -19,6 +19,7 @@ import {
 import SignInButton from '../components/SignInButton';
 import {useEffect} from 'react';
 import {useAuth0} from 'react-native-auth0';
+import SplashScreen from 'react-native-splash-screen';
 
 const AuthenticationPage = (props: AuthenticationPageProps) => {
   const {colors, dark} = useTheme();
@@ -51,6 +52,9 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
 
   useEffect(() => {
     checkIfUserLoggedInAlready();
+    if (status !== 'pending') {
+      // SplashScreen.hide();
+    }
   }, []);
 
   return (

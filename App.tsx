@@ -38,6 +38,7 @@ import {Auth0Provider, useAuth0} from 'react-native-auth0';
 import {CLIENT_ID, DOMAIN_ID} from './src/utils/contants';
 import InitialPage from './src/pages/InitialPage';
 import {PersistGate} from 'redux-persist/integration/react';
+import SplashScreen from 'react-native-splash-screen';
 
 import {persistStore} from 'redux-persist';
 let persistor = persistStore(Store);
@@ -46,6 +47,11 @@ function App() {
   const colorScheme: ColorSchemeName = useColorScheme();
   const {colors} = useTheme();
   const {user} = useAuth0();
+
+  // React.useEffect(() => {
+  //   SplashScreen.hide();
+  // }, []);
+
   return (
     <Auth0Provider domain={DOMAIN_ID} clientId={CLIENT_ID}>
       <Provider store={Store}>

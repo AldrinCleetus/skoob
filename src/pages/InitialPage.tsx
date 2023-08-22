@@ -20,6 +20,8 @@ import AuthenticationPage from './AuthenticationPage';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useEffect} from 'react';
 import BookmarkedBooksPage from './BookmarkedBooksPage';
+import React from 'react';
+import SplashScreen from 'react-native-splash-screen';
 
 const InitialPage = () => {
   const Tab = createBottomTabNavigator<RootStackParamList>();
@@ -31,6 +33,12 @@ const InitialPage = () => {
   const {isUserLoggedIn, status} = useSelector(
     (state: RootState) => state.userAuth,
   );
+
+  useEffect(() => {
+    if (status !== 'pending' && status !== 'idle') {
+      SplashScreen.hide();
+    }
+  }, [status]);
 
   return (
     <NavigationContainer
