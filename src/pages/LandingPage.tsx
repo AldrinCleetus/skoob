@@ -5,7 +5,6 @@ import {LandingPageProps} from '../types/types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
 import SearchBar from '../components/SearchBar';
-import {useBackHandler} from '../hooks/useBackHandler';
 import {useEffect} from 'react';
 
 const LandingPage = ({navigation, route}: LandingPageProps) => {
