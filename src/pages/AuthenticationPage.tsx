@@ -1,14 +1,5 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-} from 'react-native';
-import {AuthenticationPageProps} from '../types/types';
+import {View, Image, ActivityIndicator, StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
 import {
@@ -19,21 +10,18 @@ import {
 import SignInButton from '../components/SignInButton';
 import {useEffect} from 'react';
 import {useAuth0} from 'react-native-auth0';
-import SplashScreen from 'react-native-splash-screen';
+import React from 'react';
 
-const AuthenticationPage = (props: AuthenticationPageProps) => {
+const AuthenticationPage = () => {
   const {colors, dark} = useTheme();
 
   const LogoImage = dark
     ? require('../../assets/logo-main.png')
     : require('../../assets/logo-main-light.png');
 
-  const {isUserLoggedIn, status} = useSelector(
-    (state: RootState) => state.userAuth,
-  );
+  const {status} = useSelector((state: RootState) => state.userAuth);
 
-  const {authorize, user, clearSession, hasValidCredentials, getCredentials} =
-    useAuth0();
+  const {hasValidCredentials} = useAuth0();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -55,11 +43,12 @@ const AuthenticationPage = (props: AuthenticationPageProps) => {
     if (status !== 'pending') {
       // SplashScreen.hide();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <View style={[styles.authPageContainer, {backgroundColor: colors.primary}]}>
-      <Image style={styles.authPageLogo} source={LogoImage}></Image>
+      <Image style={styles.authPageLogo} source={LogoImage} />
       {status === 'pending' && (
         <ActivityIndicator
           style={styles.loader}

@@ -18,7 +18,8 @@ const Book = ({book}: BookProps) => {
           style={styles.bookThumbnail}
           source={{
             uri: book.image,
-          }}></Image>
+          }}
+        />
         <Text style={[styles.bookTitle, {color: MyDefaultTheme.colors.text}]}>
           {book.title}
         </Text>

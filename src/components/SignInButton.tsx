@@ -37,10 +37,7 @@ const SignInButton = () => {
     <TouchableOpacity
       onPress={onSignIn}
       style={[styles.signInButton, {backgroundColor: colors.card}]}>
-      <FontAwesomeIcon
-        size={20}
-        color={colors.text}
-        icon={faGoogle}></FontAwesomeIcon>
+      <FontAwesomeIcon size={20} color={colors.text} icon={faGoogle} />
       <Text style={[styles.signInButtonText, {color: colors.text}]}>
         Sign In With Google
       </Text>

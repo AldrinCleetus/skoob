@@ -1,29 +1,19 @@
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useAuth0} from 'react-native-auth0';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store/Store';
-import {setLoggedOut, setUserLoading} from '../store/features/userAuthSlice';
+import {setLoggedOut} from '../store/features/userAuthSlice';
 import {capitalizeFirstLetter} from '../utils/helper';
 import UserStats from '../components/UserStats';
-import {useNavigation, useTheme} from '@react-navigation/native';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBookBookmark} from '@fortawesome/free-solid-svg-icons';
+import {useTheme} from '@react-navigation/native';
+import React from 'react';
 
 const ProfileScreen = () => {
-  const {authorize, user, clearSession} = useAuth0();
+  const {user, clearSession} = useAuth0();
   const dispatch = useDispatch<AppDispatch>();
   const {bookmarked} = useSelector((state: RootState) => state.bookmark);
 
   const {colors} = useTheme();
-
-  const navigate = useNavigation();
 
   const logOut = async () => {
     try {
@@ -36,7 +26,7 @@ const ProfileScreen = () => {
   };
 
   if (!user) {
-    return <View></View>;
+    return <View />;
   }
 
   return (
@@ -57,15 +47,8 @@ const ProfileScreen = () => {
       />
       <TouchableOpacity
         onPress={logOut}
-        style={{
-          width: '80%',
-          alignSelf: 'center',
-          backgroundColor: colors.primary,
-          paddingHorizontal: 10,
-          paddingVertical: 10,
-          borderRadius: 100,
-        }}>
-        <Text style={{alignSelf: 'center', fontSize: 22}}>Log Out</Text>
+        style={[styles.logOutContainer, {backgroundColor: colors.primary}]}>
+        <Text style={styles.logOutText}>Log Out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -98,6 +81,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     color: '#555',
+  },
+  logOutContainer: {
+    width: '80%',
+    alignSelf: 'center',
+
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 100,
+  },
+  logOutText: {
+    alignSelf: 'center',
+    fontSize: 22,
   },
 });
 

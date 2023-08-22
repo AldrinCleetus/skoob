@@ -20,8 +20,9 @@ const BookmarkedBooksPage = () => {
           numColumns={2}
           data={bookmarked}
           renderItem={item => {
-            return <Book book={item.item}></Book>;
-          }}></FlatList>
+            return <Book book={item.item} />;
+          }}
+        />
       )}
     </View>
   );
@@ -29,9 +30,11 @@ const BookmarkedBooksPage = () => {
 
 const styles = StyleSheet.create({
   bookmarkTitle: {
-    textAlign: 'center',
-    fontSize: 32,
-    fontWeight: '300',
+    textAlign: 'left',
+    marginHorizontal: 20,
+    fontSize: 26,
+
+    fontWeight: 'bold',
     marginTop: 20,
   },
   booksContainer: {

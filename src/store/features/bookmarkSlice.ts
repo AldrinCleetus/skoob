@@ -1,7 +1,5 @@
-import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {BasicBookDetails} from '../../types/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {RootState} from '../Store';
 
 const initialState: BookmarkState = {
   bookmarked: [],
@@ -16,9 +14,6 @@ const bookmarkSlice = createSlice({
   initialState,
   reducers: {
     addtoBookmark: (state, action: PayloadAction<BasicBookDetails>) => {
-      // console.log('add', action.payload);
-      // state.bookmarked.push(action.payload);
-      // console.log('add');
       state.bookmarked.push(action.payload);
     },
     removeFromBookmark: (state, action: PayloadAction<BasicBookDetails>) => {

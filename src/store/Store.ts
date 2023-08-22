@@ -1,4 +1,4 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import booksSlice from './features/bookSlice';
 import userAuthSlice from './features/userAuthSlice';
 import {combineReducers} from 'redux';
@@ -6,6 +6,7 @@ import {persistReducer} from 'redux-persist';
 import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import bookmarkSlice from './features/bookmarkSlice';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const persistConfig = {
   key: 'root',
@@ -18,8 +19,6 @@ const rootReducer = combineReducers({
   bookmark: persistReducer(persistConfig, bookmarkSlice.reducer),
 });
 
-const customMiddleware = [thunk]; // Add any other middleware you need
-
 const Store = configureStore({
   reducer: rootReducer,
   middleware: [thunk],
@@ -27,5 +26,7 @@ const Store = configureStore({
 
 export type RootState = ReturnType<typeof Store.getState>;
 export type AppDispatch = typeof Store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default Store;

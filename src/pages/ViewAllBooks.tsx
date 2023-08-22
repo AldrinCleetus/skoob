@@ -10,6 +10,7 @@ import {RootState} from '../store/Store';
 import Book from '../components/Book';
 import {MyDefaultTheme} from '../utils/Theme';
 import {BasicBookDetails} from '../types/types';
+import React from 'react';
 
 export type ViewAllBooksProps = {
   books: BasicBookDetails[];
@@ -29,11 +30,7 @@ const ViewAllBooks = () => {
         Recommended
       </Text>
       {status === 'pending' && (
-        <ActivityIndicator
-          style={{alignSelf: 'center'}}
-          size="large"
-          color="#00ff00"
-        />
+        <ActivityIndicator style={styles.loader} size="large" color="#00ff00" />
       )}
 
       {status === 'succeeded' && (
@@ -42,8 +39,9 @@ const ViewAllBooks = () => {
           numColumns={2}
           data={response.books}
           renderItem={item => {
-            return <Book book={item.item}></Book>;
-          }}></FlatList>
+            return <Book book={item.item} />;
+          }}
+        />
       )}
     </View>
   );
@@ -61,6 +59,9 @@ const styles = StyleSheet.create({
   viewAllList: {
     flex: 1,
     justifyContent: 'space-evenly',
+  },
+  loader: {
+    alignSelf: 'center',
   },
 });
 

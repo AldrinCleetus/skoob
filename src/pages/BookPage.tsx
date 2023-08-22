@@ -49,9 +49,7 @@ const BookPage = ({route}: BookPageProps) => {
   };
   return (
     <View style={styles.bookPageContainer}>
-      <Image
-        style={styles.bookPageThumbnail}
-        source={{uri: book.image}}></Image>
+      <Image style={styles.bookPageThumbnail} source={{uri: book.image}} />
       <Text style={[styles.bookPageTitle, {color: colors.primary}]}>
         {book.title}
       </Text>
@@ -64,27 +62,32 @@ const BookPage = ({route}: BookPageProps) => {
           style={styles.ratingStarIcon}
           size={16}
           icon={faStar}
-          color="#ffd700"></FontAwesomeIcon>
+          color="#ffd700"
+        />
         <FontAwesomeIcon
           style={styles.ratingStarIcon}
           size={16}
           icon={faStar}
-          color="#ffd700"></FontAwesomeIcon>
+          color="#ffd700"
+        />
         <FontAwesomeIcon
           style={styles.ratingStarIcon}
           size={16}
           icon={faStar}
-          color="#ffd700"></FontAwesomeIcon>
+          color="#ffd700"
+        />
         <FontAwesomeIcon
           style={styles.ratingStarIcon}
           size={16}
           icon={faStar}
-          color="#ffd700"></FontAwesomeIcon>
+          color="#ffd700"
+        />
         <FontAwesomeIcon
           style={styles.ratingStarIcon}
           size={16}
           icon={faStar}
-          color="grey"></FontAwesomeIcon>
+          color="grey"
+        />
         <Text style={styles.ratingAmount}>4.2 (2432)</Text>
       </View>
       <UserStats
@@ -101,13 +104,9 @@ const BookPage = ({route}: BookPageProps) => {
           gap: 6,
         }}>
         {!isBookmarked ? (
-          <ToggleButtonWithIcon
-            onPressFunction={toggleBookMark}
-            status="OFF"></ToggleButtonWithIcon>
+          <ToggleButtonWithIcon onPressFunction={toggleBookMark} status="OFF" />
         ) : (
-          <ToggleButtonWithIcon
-            onPressFunction={toggleBookMark}
-            status="ON"></ToggleButtonWithIcon>
+          <ToggleButtonWithIcon onPressFunction={toggleBookMark} status="ON" />
         )}
         <TouchableOpacity
           style={{

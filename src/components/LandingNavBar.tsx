@@ -21,7 +21,8 @@ const LandingNavBar = () => {
       <View style={styles.navImageContainer}>
         <Image
           style={styles.navImage}
-          source={{uri: 'https://i.imgur.com/P5ZDZq2.png'}}></Image>
+          source={{uri: 'https://i.imgur.com/P5ZDZq2.png'}}
+        />
       </View>
     </View>
   );

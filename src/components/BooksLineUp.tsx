@@ -12,6 +12,7 @@ import {RootState} from '../store/Store';
 import Book from './Book';
 import {BooksLineUpProps} from '../types/types';
 import useViewAll from '../hooks/useViewAll';
+import React from 'react';
 
 const BooksLineUp = ({title, booksToShow}: BooksLineUpProps) => {
   const {status} = useSelector((state: RootState) => state.booksFromApi);
@@ -31,10 +32,7 @@ const BooksLineUp = ({title, booksToShow}: BooksLineUpProps) => {
       </View>
 
       {status === 'pending' && (
-        <ActivityIndicator
-          style={styles.loading}
-          size={'large'}
-          animating></ActivityIndicator>
+        <ActivityIndicator style={styles.loading} size={'large'} animating />
       )}
       {status === 'succeeded' && (
         <FlatList
@@ -42,8 +40,9 @@ const BooksLineUp = ({title, booksToShow}: BooksLineUpProps) => {
           horizontal={true}
           data={booksToShow}
           renderItem={item => {
-            return <Book book={item.item}></Book>;
-          }}></FlatList>
+            return <Book book={item.item} />;
+          }}
+        />
       )}
     </View>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 const VerticalSeparator = () => {
-  return <View style={styles.separator}></View>;
+  return <View style={styles.separator} />;
 };
 
 const styles = StyleSheet.create({

@@ -1,9 +1,8 @@
 import {NavigationContainer, useTheme} from '@react-navigation/native';
 import {ColorSchemeName, StyleSheet, useColorScheme} from 'react-native';
-import {useAuth0} from 'react-native-auth0';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/Store';
-import {AppDarkColors, MyDarkTheme, MyDefaultTheme} from '../utils/Theme';
+import {MyDarkTheme, MyDefaultTheme} from '../utils/Theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from '../types/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -17,7 +16,6 @@ import Home from './Home';
 import ViewAllBooks from './ViewAllBooks';
 import ProfileScreen from './Profile';
 import AuthenticationPage from './AuthenticationPage';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useEffect} from 'react';
 import BookmarkedBooksPage from './BookmarkedBooksPage';
 import React from 'react';
@@ -27,8 +25,7 @@ const InitialPage = () => {
   const Tab = createBottomTabNavigator<RootStackParamList>();
 
   const colorScheme: ColorSchemeName = useColorScheme();
-  const {colors, dark} = useTheme();
-  const {user, hasValidCredentials, getCredentials} = useAuth0();
+  const {dark} = useTheme();
 
   const {isUserLoggedIn, status} = useSelector(
     (state: RootState) => state.userAuth,
@@ -60,9 +57,10 @@ const InitialPage = () => {
           <>
             <Tab.Screen
               options={{
-                tabBarIcon: ({size, color, focused}) => (
+                // eslint-disable-next-line react/no-unstable-nested-components
+                tabBarIcon: ({size, color}) => (
                   <FontAwesomeIcon
-                    style={{backgroundColor: '#FFFFFF00'}}
+                    style={styles.iconStyle}
                     size={size}
                     color={color}
                     icon={faHome}
@@ -76,9 +74,10 @@ const InitialPage = () => {
               name="Recommended"
               component={ViewAllBooks}
               options={{
-                tabBarIcon: ({size, color, focused}) => (
+                // eslint-disable-next-line react/no-unstable-nested-components
+                tabBarIcon: ({size, color}) => (
                   <FontAwesomeIcon
-                    style={{backgroundColor: '#FFFFFF00'}}
+                    style={styles.iconStyle}
                     size={size}
                     color={color}
                     icon={faBookOpen}
@@ -90,9 +89,10 @@ const InitialPage = () => {
               name="Bookmarks"
               component={BookmarkedBooksPage}
               options={{
-                tabBarIcon: ({size, color, focused}) => (
+                // eslint-disable-next-line react/no-unstable-nested-components
+                tabBarIcon: ({size, color}) => (
                   <FontAwesomeIcon
-                    style={{backgroundColor: '#FFFFFF00'}}
+                    style={styles.iconStyle}
                     size={size}
                     color={color}
                     icon={faBookBookmark}
@@ -104,9 +104,10 @@ const InitialPage = () => {
               name="Profile"
               component={ProfileScreen}
               options={{
-                tabBarIcon: ({size, color, focused}) => (
+                // eslint-disable-next-line react/no-unstable-nested-components
+                tabBarIcon: ({size, color}) => (
                   <FontAwesomeIcon
-                    style={{backgroundColor: '#FFFFFF00'}}
+                    style={styles.iconStyle}
                     size={size}
                     color={color}
                     icon={faUserCircle}
@@ -137,6 +138,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 100,
     marginBottom: 10,
+  },
+  iconStyle: {
+    backgroundColor: '#FFFFFF00',
   },
 });
 

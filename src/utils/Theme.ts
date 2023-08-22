@@ -36,15 +36,3 @@ export const MyDarkTheme: Theme = {
     notification: AppDarkColors.link,
   },
 };
-
-// look into this later
-
-// export const MyDarkTheme: Theme = {
-//   ...DefaultTheme,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: AppColors.primary,
-//     background: AppColors.background,
-//     notification: AppColors.link,
-//   },
-// };
