@@ -9,7 +9,7 @@ const BookmarkedBooksPage = () => {
   const {bookmarked} = useSelector((state: RootState) => state.bookmark);
 
   return (
-    <View>
+    <View style={styles.pageContainer}>
       <Text
         style={[styles.bookmarkTitle, {color: MyDefaultTheme.colors.primary}]}>
         Bookmarked Books
@@ -30,11 +30,13 @@ const BookmarkedBooksPage = () => {
 };
 
 const styles = StyleSheet.create({
+  pageContainer: {
+    height: '90%',
+  },
   bookmarkTitle: {
     textAlign: 'left',
     marginHorizontal: 20,
     fontSize: 26,
-
     fontWeight: 'bold',
     marginTop: 20,
   },
